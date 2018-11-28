@@ -3,7 +3,7 @@ var SEARCH_TERM = 'is:unread [Search Keywords for Gmail]';
 
 function getMail(){
   var myFolder = DriveApp.getFolderById(FOLDER_ID); //フォルダを取得
-  var myThreads = GmailApp.search(SEARCH_TERM, 0, 200); //条件にマッチしたスレッドを検索して取得 / 最大500 
+  var myThreads = GmailApp.search(SEARCH_TERM, 0, 30); //条件にマッチしたスレッドを検索して取得 / 最大500 
   var myMessages = GmailApp.getMessagesForThreads(myThreads); //スレッドからメールを取得し二次元配列で格納
 
   for(var i in myMessages){
