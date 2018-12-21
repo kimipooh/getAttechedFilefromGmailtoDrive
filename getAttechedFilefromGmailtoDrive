@@ -12,7 +12,8 @@ function getMail(){
       var attachments = myMessages[i][j].getAttachments(); //添付ファイルを取得
       var from = myMessages[i][j].getFrom(); //添付ファイルを取得
       for(var k in attachments){
-        myFolder.createFile(from+"_"+attachments[k].getName(),attachments[k]); //ドライブに添付ファイルを保存
+          attachments[k].setName(from+"_"+attachments[k].getName()); // 添付ファイルの保存名変更
+          myFolder.createFile(attachments[k]); //ドライブに添付ファイルを保存
       }
       myMessages[i][j].markRead(); //既読（処理が終わったら既読にする）
     }
