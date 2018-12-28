@@ -12,12 +12,12 @@ function getMail(){
         var attachments = myMessages[i][j].getAttachments(); //添付ファイルを取得
         var from = myMessages[i][j].getFrom(); //差出人名を取得
         var saveFolder_s = myFolder.getFoldersByName(from);
-        if(saveFolder_s.hasNext()){ // 「差出人名」フォルダに存在していれば、そのフォルダをsaveFolderにセットする
-          var saveFolder = DriveApp.getFolderById(saveFolder_s.next().getId());
-        }else{ // 「差出人名」フォルダに存在していなければ、そのフォルダを作成して、saveFolderにセットする
-          var saveFolder = myFolder.createFolder(from);
-        }
         for(var k in attachments){
+          if(saveFolder_s.hasNext()){ // 「差出人名」フォルダに存在していれば、そのフォルダをsaveFolderにセットする
+            var saveFolder = DriveApp.getFolderById(saveFolder_s.next().getId());
+          }else{ // 「差出人名」フォルダに存在していなければ、そのフォルダを作成して、saveFolderにセットする
+            var saveFolder = myFolder.createFolder(from);
+          }
           attachments[k].setName(from+"_"+attachments[k].getName()); // 添付ファイルの保存名変更
           saveFolder.createFile(attachments[k]); //ドライブに添付ファイルを保存
         }
