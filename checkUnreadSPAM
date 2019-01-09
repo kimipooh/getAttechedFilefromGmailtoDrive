@@ -1,3 +1,5 @@
+var SEND_TO = "[your e-mail address]";
+
 function checkUnreadSPAM(){
   var mailCount = GmailApp.getSpamUnreadCount(); // 未読の迷惑メイル数取得
   var mailBody = '迷惑メールの未読件数は' + mailCount + 'です。<br/>';
@@ -22,7 +24,7 @@ function checkUnreadSPAM(){
   mailBody += '</ul>';
 
   MailApp.sendEmail(
-        "kimipooh@gmail.com",// 送信先メール
+        SEND_TO,// 送信先メール
         "迷惑メールの未読一覧 (件数: "+mailCount+")",  // メール件名
         "",
         {
