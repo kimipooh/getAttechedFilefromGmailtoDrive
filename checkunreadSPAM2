@@ -19,6 +19,7 @@ function checkUnreadSPAM(){
         mailBody += '<li>'+spamMessage_dates+' '+spamMessage_subject+' - ('+spamMessage_from+')</li>';
       }
     }
+    spamMassages[i][j].markRead(); // 処理し終わったら既読にする
   }
     
   mailBody += '</ul>';
