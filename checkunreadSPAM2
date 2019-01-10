@@ -15,7 +15,7 @@ function checkUnreadSPAM(){
         var spamMessage_from    = spamMassages[i][j].getFrom();
         var spamMessage_date    = spamMassages[i][j].getDate();
         var spamMessage_dates   = Utilities.formatDate(new Date(spamMessage_date), 'JST', 'yyyy-mm-dd HH:MM:ss');
-  
+
         mailBody += '<li>'+spamMessage_dates+' '+spamMessage_subject+' - ('+spamMessage_from+')</li>';
       }
     }
