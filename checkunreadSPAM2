@@ -1,0 +1,34 @@
+var SEND_TO = "[your e-mail address]";
+
+function checkUnreadSPAM(){
+  var mailCount = GmailApp.getSpamUnreadCount(); // 未読の迷惑メイル数取得
+  var mailBody = '迷惑メールの未読件数は' + mailCount + 'です。<br/>';
+  var spamThreads = GmailApp.getSpamThreads(); // 迷惑メールスレッドのオブジェクト取得
+  var spamMassages = GmailApp.getMessagesForThreads(spamThreads);
+  
+  mailBody += '未読の迷惑メール - 件名リスト';
+  mailBody += '<ul>';
+  for(var i in spamMassages){
+    for(var j in spamMassages[i]){
+      if(spamMassages[i][j].isUnread()){
+        var spamMessage_subject = spamMassages[i][j].getSubject();
+        var spamMessage_from    = spamMassages[i][j].getFrom();
+        var spamMessage_date    = spamMassages[i][j].getDate();
+        var spamMessage_dates   = Utilities.formatDate(new Date(spamMessage_date), 'JST', 'yyyy-mm-dd HH:MM:ss');
+  
+        mailBody += '<li>'+spamMessage_dates+' '+spamMessage_subject+' - ('+spamMessage_from+')</li>';
+      }
+    }
+  }
+    
+  mailBody += '</ul>';
+
+  MailApp.sendEmail(
+        SEND_TO,// 送信先メール
+        "迷惑メールの未読一覧 (件数: "+mailCount+")",  // メール件名
+        "",
+        {
+            htmlBody: mailBody
+        }
+  );
+}
