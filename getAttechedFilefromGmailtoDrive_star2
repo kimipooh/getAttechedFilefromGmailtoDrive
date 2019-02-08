@@ -10,6 +10,7 @@ function getMail(){
     for(var j in myMessages[i]){
       if(!myMessages[i][j].isStarred()){ //スターがないメッセージのみ処理をする
         var attachments = myMessages[i][j].getAttachments(); //添付ファイルを取得
+        if(attachments.length==0) continue; // もし添付ファイルがなしならスキップ
         var from = myMessages[i][j].getFrom(); //差出人名を取得
         var saveFolder_s = myFolder.getFoldersByName(from);
         if(saveFolder_s.hasNext()){ // 「差出人名」フォルダに存在していれば、そのフォルダをsaveFolderにセットする
